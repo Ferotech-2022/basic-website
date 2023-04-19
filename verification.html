@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Verification Page</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<h1>Verify Your Phone Number</h1>
+	<p>Please enter your phone number below to receive a verification code:</p>
+	<form id="verification-form">
+		<label for="phone-number">Phone Number:</label>
+		<input type="text" id="phone-number" name="phone-number"><br><br>
+		<input type="submit" value="Send Verification Code">
+	</form>
+	<div id="verification-code-container" style="display: none;">
+		<label for="verification-code">Verification Code:</label>
+		<input type="text" id="verification-code" name="verification-code"><br><br>
+		<input type="submit" value="Verify Code" id="verify-code-button">
+	</div>
+	<div id="verification-status"></div>
+
+	<script>
+		$(document).ready(function() {
+			$("#verification-form").submit(function(event) {
+				event.preventDefault();
+				var phoneNumber = $("#phone-number").val();
+				$.ajax({
+					url: "https://apilayer.com/marketplace/number_verification-api",
+					method: "POST",
+					data: { phone_number: phoneNumber },
+					success: function(result) {
+							$("#verification-code-container").show();
+							$("#verify-code-button").click(function() {
+								var verificationCode = $("#verification-code").val();
+								$.ajax({
+									url: "https://apilayer.com/marketplace/number_verification-api",
+									method: "POST",
+									data: { phone_number: phoneNumber, verification_code: verificationCode },
+									success: function(result) {
+										$("#verification-status").text("Verification successful!");
+									},
+									error: function(error) {
+										$("#verification-status").text("Verification failed: " + error.responseJSON.message);
+									}
+								});
+							});
+					},
+					error: function(error) {
+						$("#verification-status").text("Error: " + error.responseJSON.message);
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
