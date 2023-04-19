@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Debt Tracker</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <h1>Debt Tracker</h1>
+
+    <!-- Add a new debt form -->
+    <div id="add-debt">
+      <h2>Add a new debt</h2>
+      <label for="debtor">Debtor:</label>
+      <input type="text" id="debtor">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount">
+      <button onclick="addDebt()">Add Debt</button>
+    </div>
+
+    <!-- List of debts -->
+    <table>
+      <thead>
+        <tr>
+          <th>Debtor</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Pay</th>
+        </tr>
+      </thead>
+      <tbody id="debt-list">
+        <!-- List of debts will be inserted here -->
+      </tbody>
+    </table>
+
+    <!-- Add a new payment form -->
+    <div id="add-payment">
+      <h2>Add a new payment</h2>
+      <label for="creditor">Creditor:</label>
+      <input type="text" id="creditor">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount">
+      <button onclick="addPayment()">Add Payment</button>
+    </div>
+
+    <!-- List of payments -->
+    <table>
+      <thead>
+        <tr>
+          <th>Creditor</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Pay</th>
+        </tr>
+      </thead>
+      <tbody id="payment-list">
+        <!-- List of payments will be inserted here -->
+      </tbody>
+    </table>
+
+    <!-- Paystack payment form -->
+    <div id="paystack-form">
+      <h2>Make a payment</h2>
+      <label for="paystack-email">Email:</label>
+      <input type="email" id="paystack-email">
+      <label for="paystack-amount">Amount:</label>
+      <input type="number" id="paystack-amount">
+      <button onclick="payWithPaystack()">Pay with Paystack</button>
+    </div>
+    <!-- Paystack script -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
+    <!-- Debt Tracker script -->
+    <script src="debttracker.js"></script>
+  </body>
+</html>
